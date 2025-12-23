@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Data Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-5">
+    <div class="container">
+        <h1 class="mb-4 text-center fw-bold">📊 DATA REGISTER MEMBER</h1>
+        <div class="card shadow">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Waktu</th>
+                            <th>Username Asli</th>
+                            <th>Nama Baru</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% dataRegis.forEach(user => { %>
+                            <tr>
+                                <td><%= user.tanggal.toLocaleString() %></td>
+                                <td><%= user.username %></td>
+                                <td class="fw-bold text-success"><%= user.nicknameBaru %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('refresh_halaman', () => {
+            location.reload(); // Refresh otomatis
+        });
+    </script>
+</body>
+</html>
